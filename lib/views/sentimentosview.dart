@@ -1,13 +1,60 @@
 import 'package:flutter/material.dart';
+import 'package:sentimentos/model/sentimento.dart';
+import 'package:sentimentos/model/tipo_sentimento.dart';
+import 'package:sentimentos/widgets/sentimento_tile.dart';
 
-class SentimentosView extends StatelessWidget{
+class SentimentosView extends StatefulWidget {
   @override
-  Widget build(BuildContext context){
+  _SentimentosViewState createState() => _SentimentosViewState();
+}
+
+class _SentimentosViewState extends State<SentimentosView> {
+  final List<Sentimento> _sentimentos = [
+//    Sentimento(
+//        tipoSentimento: TipoSentimento.FELIZ,
+//        pensamentos: "Estou feliz porque..."),
+//    Sentimento(
+//        tipoSentimento: TipoSentimento.INDIFERENTE,
+//        pensamentos: "Estou indiferente porque..."),
+//    Sentimento(
+//        tipoSentimento: TipoSentimento.NORMAL,
+//        pensamentos: "Estou normal porque..."),
+//    Sentimento(
+//        tipoSentimento: TipoSentimento.TRISTE,
+//        pensamentos: "Estou triste porque..."),
+//    Sentimento(
+//        tipoSentimento: TipoSentimento.RAIVA,
+//        pensamentos: "Estou com raiva!!!"),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Sentimentos"),
       ),
-      body: Container(),
+      body: Container(
+        child: _sentimentos.isEmpty
+            ? Padding(
+                padding: EdgeInsets.symmetric(vertical: 32, horizontal: 16),
+                child: Text(
+                  "Nenhum sentimento criado",
+                  style: Theme.of(context).textTheme.display1,
+                  textAlign: TextAlign.center,
+                ),
+              )
+            : ListView.separated(
+                padding: EdgeInsets.symmetric(vertical: 32, horizontal: 16),
+                itemCount: _sentimentos.length,
+                itemBuilder: (context, int index) {
+                  Sentimento sentimento = _sentimentos[index];
+                  return SentimentoTile(sentimento: sentimento);
+                },
+                separatorBuilder: (context, int index) {
+                  return Divider(color: Colors.black);
+                },
+              ),
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: _addSentimento,
         child: Icon(Icons.add),
@@ -30,9 +77,7 @@ class SentimentosView extends StatelessWidget{
     );
   }
 }
-_addSentimento(){
 
-}
-_removeSentimento(){
+_addSentimento() {}
 
-}
+_removeSentimento() {}
