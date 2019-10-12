@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sentimentos/adicionar/adicionar_sentimento.dart';
 import 'package:sentimentos/model/sentimento.dart';
 import 'package:sentimentos/model/tipo_sentimento.dart';
 import 'package:sentimentos/widgets/sentimento_tile.dart';
@@ -9,7 +10,7 @@ class SentimentosView extends StatefulWidget {
 }
 
 class _SentimentosViewState extends State<SentimentosView> {
-  final List<Sentimento> _sentimentos = [
+  List<Sentimento> _sentimentos = [
 //    Sentimento(
 //        tipoSentimento: TipoSentimento.FELIZ,
 //        pensamentos: "Estou feliz porque..."),
@@ -76,8 +77,22 @@ class _SentimentosViewState extends State<SentimentosView> {
       ),
     );
   }
+
+  _salvar(Sentimento sentimento) {
+    setState(() {
+      _sentimentos.add(sentimento);
+    });
+  }
+
+  _addSentimento() {
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (BuildContext context) => AdicionarSentimento(salvar: _salvar),
+    ));
+  }
+
+  _removeSentimento() {
+    setState(() {
+      _sentimentos=[];
+    });
+  }
 }
-
-_addSentimento() {}
-
-_removeSentimento() {}
