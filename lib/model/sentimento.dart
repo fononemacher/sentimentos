@@ -1,6 +1,6 @@
 import 'package:sentimentos/model/tipo_sentimento.dart';
 
-class Sentimento{
+class Sentimento {
   TipoSentimento tipoSentimento;
   String pensamentos;
 
@@ -8,23 +8,24 @@ class Sentimento{
     this.tipoSentimento,
     this.pensamentos,
   });
-String get nomeSentimento{
-switch(tipoSentimento){
-  case TipoSentimento.FELIZ:
-  return "Feliz";
-  case TipoSentimento.NORMAL:
-    return "Normal";
-  case TipoSentimento.INDIFERENTE:
-    return "Indiferente";
-  case TipoSentimento.TRISTE:
-    return "Triste";
-  case TipoSentimento.RAIVA:
-    return "Raiva";
-  default:
-    return "";
 
-}
-}
+  String get nomeSentimento {
+    switch (tipoSentimento) {
+      case TipoSentimento.FELIZ:
+        return "Feliz";
+      case TipoSentimento.NORMAL:
+        return "Normal";
+      case TipoSentimento.INDIFERENTE:
+        return "Indiferente";
+      case TipoSentimento.TRISTE:
+        return "Triste";
+      case TipoSentimento.RAIVA:
+        return "Raiva";
+      default:
+        return "";
+    }
+  }
+
   String get emoji {
     switch (tipoSentimento) {
       case TipoSentimento.FELIZ:

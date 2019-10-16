@@ -15,11 +15,13 @@ class AdicionarSentimento extends StatefulWidget {
 class _AdicionarSentimentoState extends State<AdicionarSentimento> {
   PageController _controller;
   bool _firstPage;
+  Sentimento _sentimento;
 
   @override
   void initState() {
     super.initState();
     _firstPage = true;
+    _sentimento = Sentimento(tipoSentimento: TipoSentimento.FELIZ);
     _controller = PageController(initialPage: 0, keepPage: true);
     _controller.addListener(_onChangedPage);
   }
@@ -55,7 +57,10 @@ class _AdicionarSentimentoState extends State<AdicionarSentimento> {
           controller: _controller,
           physics: NeverScrollableScrollPhysics(),
           children: <Widget>[
-            TipoSentimentoPage(),
+            TipoSentimentoPage(
+              sentimento: _sentimento,
+              addTipoSentimento: _addTipoSentimento,
+            ),
             TipoSentimentoPage(),
           ],
         ),
@@ -65,6 +70,12 @@ class _AdicionarSentimentoState extends State<AdicionarSentimento> {
         ),
       ),
     );
+  }
+
+  void _addTipoSentimento(TipoSentimento tipo) {
+    setState(() {
+      _sentimento.tipoSentimento=tipo;
+    });
   }
 
   void _next() {
