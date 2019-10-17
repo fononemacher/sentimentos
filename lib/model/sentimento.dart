@@ -2,11 +2,11 @@ import 'package:sentimentos/model/tipo_sentimento.dart';
 
 class Sentimento {
   TipoSentimento tipoSentimento;
-  String pensamentos;
+  String pensamentos="";
 
   Sentimento({
     this.tipoSentimento,
-    this.pensamentos,
+    this.pensamentos:"",
   });
 
   String get nomeSentimento {

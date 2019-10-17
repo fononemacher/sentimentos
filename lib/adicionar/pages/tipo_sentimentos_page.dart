@@ -7,8 +7,8 @@ class TipoSentimentoPage extends StatefulWidget {
   final Sentimento sentimento;
 
   TipoSentimentoPage({
-    this.sentimento,
-    this.addTipoSentimento,
+    @required this.sentimento,
+    @required this.addTipoSentimento,
   });
 
   @override

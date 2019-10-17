@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sentimentos/adicionar/pages/pensamentos_page.dart';
 import 'package:sentimentos/adicionar/pages/tipo_sentimentos_page.dart';
 import 'package:sentimentos/model/sentimento.dart';
 import 'package:sentimentos/model/tipo_sentimento.dart';
@@ -61,7 +62,9 @@ class _AdicionarSentimentoState extends State<AdicionarSentimento> {
               sentimento: _sentimento,
               addTipoSentimento: _addTipoSentimento,
             ),
-            TipoSentimentoPage(),
+            PensamentosPage(
+              addDescricao: _addPensamentos,
+            ),
           ],
         ),
         floatingActionButton: FloatingActionButton(
@@ -74,20 +77,42 @@ class _AdicionarSentimentoState extends State<AdicionarSentimento> {
 
   void _addTipoSentimento(TipoSentimento tipo) {
     setState(() {
-      _sentimento.tipoSentimento=tipo;
+      _sentimento.tipoSentimento = tipo;
     });
   }
 
-  void _next() {
+  void _addPensamentos(String value) {
+    setState(() {
+      _sentimento.pensamentos = value;
+    });
+  }
+
+  void _next() async {
     if (_firstPage) {
       _controller.nextPage(
           duration: Duration(milliseconds: 280), curve: Curves.easeInOut);
     } else {
-      Sentimento sentimento = Sentimento(
-        tipoSentimento: TipoSentimento.FELIZ,
-        pensamentos: "Teste",
-      );
-      widget.salvar(sentimento);
+      if (_sentimento.pensamentos.isEmpty) {
+        await showDialog(
+          context: context,
+          builder: (context) {
+            return SimpleDialog(
+              title: Text(
+                "Ateção",
+                textAlign: TextAlign.center,
+              ),
+              children: <Widget>[
+                Text(
+                  "Fale sobre seus pensamentos",
+                  textAlign: TextAlign.center,
+                )
+              ],
+            );
+          },
+        );
+        return;
+      }
+      widget.salvar(_sentimento);
       Navigator.of(context).pop();
     }
   }
